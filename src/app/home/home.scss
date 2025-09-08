@@ -1,0 +1,30 @@
+@use '../../styles/mixins' as mixins;
+
+.recipe-grid {
+  @include mixins.responsive-grid(280px);
+}
+
+.recipe-card {
+  @include mixins.card-shadow;
+  display: block;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.spinner {
+  @include mixins.loading-spinner;
+  width: 40px;
+  height: 40px;
+}
+
+// Utility class for line clamping
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

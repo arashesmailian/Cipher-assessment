@@ -1,59 +1,220 @@
-# RecipeApp
+# Recipe Explorer - Angular 20 SSR Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+A modern, responsive recipe search application built with Angular 20, featuring Server-Side Rendering (SSR), TypeScript, TailwindCSS, and SCSS. The application allows users to search for recipes and view detailed cooking instructions using the MealDB API.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- **Search Functionality**: Real-time recipe search with debounced input
+- **Recipe Details**: Comprehensive view of ingredients, instructions, and cooking videos
+- **Server-Side Rendering (SSR)**: Optimized for SEO and initial load performance
+- **Responsive Design**: Beautiful, mobile-first UI using TailwindCSS
+- **TypeScript**: Strongly typed interfaces for better code maintainability
+- **SCSS Mixins**: Reusable styling patterns for consistent design
+- **Loading States**: User-friendly loading indicators during data fetching
+- **Error Handling**: Graceful error handling with fallback UI
+
+## 📋 Prerequisites
+
+- Node.js v22.19.0+ (required for Angular 20)
+- npm v10.9.3+
+
+## 🛠️ Installation
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+cd recipe-app
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+## 🏃‍♂️ Running the Application
+
+### Development Mode (Client-Side Only)
 
 ```bash
 ng serve
+# or
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Development Mode with SSR
 
 ```bash
-ng generate component component-name
+npm run dev:ssr
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This runs the application with server-side rendering enabled at `http://localhost:4200/`.
+
+### Production Build
 
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
+This builds the application for production with SSR support.
 
-To build the project run:
+### Serve Production Build
 
 ```bash
-ng build
+npm run serve:ssr:recipe-app
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This serves the production build with SSR.
 
-## Running unit tests
+## 🧪 Running Tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Unit Tests
 
 ```bash
 ng test
+# or
+npm test
 ```
 
-## Running end-to-end tests
+This executes unit tests via [Karma](https://karma-runner.github.io).
 
-For end-to-end (e2e) testing, run:
+### Test Coverage
 
 ```bash
-ng e2e
+ng test --code-coverage
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Generates a coverage report in the `coverage/` directory.
 
-## Additional Resources
+## 📁 Project Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+recipe-app/
+├── src/
+│   ├── app/
+│   │   ├── home/                  # Home component with search
+│   │   │   ├── home.ts
+│   │   │   ├── home.html
+│   │   │   ├── home.scss
+│   │   │   └── home.spec.ts
+│   │   ├── recipe-detail/         # Recipe detail component
+│   │   │   ├── recipe-detail.ts
+│   │   │   ├── recipe-detail.html
+│   │   │   ├── recipe-detail.scss
+│   │   │   └── recipe-detail.spec.ts
+│   │   ├── models/                # TypeScript interfaces
+│   │   │   └── meal.interface.ts
+│   │   ├── services/              # API services
+│   │   │   ├── recipe.service.ts
+│   │   │   └── recipe.service.spec.ts
+│   │   ├── app.config.ts          # App configuration
+│   │   ├── app.config.server.ts   # SSR configuration
+│   │   ├── app.routes.ts          # Routing configuration
+│   │   └── app.ts                 # Root component
+│   ├── styles/
+│   │   ├── styles.scss            # Global styles with Tailwind
+│   │   └── _mixins.scss           # SCSS mixins
+│   ├── index.html                 # Main HTML file
+│   ├── main.ts                    # Client bootstrap
+│   ├── main.server.ts             # Server bootstrap
+│   └── server.ts                  # Express server for SSR
+├── tailwind.config.js             # Tailwind configuration
+├── postcss.config.js              # PostCSS configuration
+├── angular.json                   # Angular workspace config
+├── tsconfig.json                  # TypeScript config
+└── package.json                   # Dependencies
+```
+
+## 🎨 Key Technologies
+
+- **Angular 20**: Latest Angular framework with standalone components
+- **Angular Universal**: Server-side rendering for better SEO and performance
+- **TypeScript 5.9**: Strong typing and modern JavaScript features
+- **TailwindCSS 4.1**: Utility-first CSS framework
+- **SCSS**: Advanced CSS preprocessing with mixins
+- **RxJS**: Reactive programming for handling asynchronous operations
+- **Express**: Node.js server for SSR
+
+## 🔧 Architecture Decisions
+
+### Component Structure
+
+- **Standalone Components**: Using Angular's new standalone component API
+- **Smart/Dumb Pattern**: HomeComponent handles logic, templates focus on presentation
+- **Service Layer**: RecipeService encapsulates all API interactions
+
+### State Management
+
+- **RxJS Observables**: For handling asynchronous data flow
+- **Debounced Search**: Prevents excessive API calls during typing
+
+### Styling Approach
+
+- **TailwindCSS**: For rapid UI development with utility classes
+- **SCSS Mixins**: For reusable styling patterns (shadows, grids, spinners)
+- **Component-Scoped Styles**: Encapsulated styling per component
+
+### Type Safety
+
+- **Strict TypeScript**: No `any` types, proper interfaces for all data models
+- **Null Safety**: Proper handling of nullable API responses
+
+## 🌐 API Integration
+
+The application integrates with [TheMealDB API](https://www.themealdb.com/api.php):
+
+- **Search Endpoint**: `www.themealdb.com/api/json/v1/1/search.php?s={query}`
+- **Detail Endpoint**: `www.themealdb.com/api/json/v1/1/lookup.php?i={id}`
+
+## 🧪 Testing Strategy
+
+### Unit Tests Coverage
+
+1. **Search Logic**: Testing debounced search functionality
+2. **Component Rendering**: Ensuring components render correctly
+3. **Service Methods**: Testing API calls and data transformation
+4. **Error Handling**: Verifying graceful error handling
+
+### Test Files
+
+- `recipe.service.spec.ts`: Service layer tests
+- `home.spec.ts`: Home component tests with search functionality
+- `app.spec.ts`: Root component tests
+
+## 🚀 Performance Optimizations
+
+- **Server-Side Rendering**: Faster initial page load and better SEO
+- **Lazy Loading Images**: Images load only when visible
+- **Debounced Search**: Reduces API calls during typing
+- **HTTP Caching**: Browser caching for API responses
+
+## 📝 Code Quality
+
+- **ESLint/TSLint**: Code linting for consistency
+- **Prettier**: Code formatting configuration included
+- **Strong Typing**: TypeScript interfaces for all data models
+- **Component Tests**: Unit tests for critical functionality
+
+## 🔮 Future Enhancements
+
+- Add pagination for search results
+- Implement favorite recipes feature
+- Add advanced filters (cuisine, category, ingredients)
+- Implement offline support with service workers
+- Add recipe rating system
+- Implement user authentication
+
+## 📄 License
+
+This project was created as part of a Frontend Developer assessment.
+
+## 👥 Author
+
+Created for Frontend Developer Position Assessment
+
+---
+
+**Note**: This application was built in 2-3 hours as per the assessment requirements, focusing on clean, maintainable code over feature completeness.

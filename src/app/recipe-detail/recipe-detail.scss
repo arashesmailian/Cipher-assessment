@@ -1,0 +1,32 @@
+@use '../../styles/mixins' as mixins;
+
+.spinner {
+  @include mixins.loading-spinner;
+  width: 40px;
+  height: 40px;
+}
+
+// Responsive adjustments for sticky sidebar
+@media (min-width: 1024px) {
+  .sticky {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+// Prose styles for instructions
+.prose {
+  p {
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+}
