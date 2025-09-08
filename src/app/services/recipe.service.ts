@@ -60,6 +60,8 @@ export class RecipeService {
   extractIngredients(meal: Meal): Ingredient[] {
     const ingredients: Ingredient[] = [];
 
+    // TheMealDB API stores ingredients in numbered fields (strIngredient1, strIngredient2, etc.)
+    // We need to iterate through all 20 possible ingredient slots
     for (let i = 1; i <= 20; i++) {
       const ingredientKey = `strIngredient${i}` as keyof Meal;
       const measureKey = `strMeasure${i}` as keyof Meal;
@@ -67,6 +69,7 @@ export class RecipeService {
       const ingredient = meal[ingredientKey] as string;
       const measure = meal[measureKey] as string;
 
+      // Only add ingredients that have actual content (not empty strings)
       if (ingredient && ingredient.trim()) {
         ingredients.push({
           name: ingredient.trim(),
@@ -76,19 +79,5 @@ export class RecipeService {
     }
 
     return ingredients;
-  }
-
-  /**
-   * Get a brief description from ingredients
-   * @param meal - Meal object
-   * @returns Brief description string
-   */
-  getBriefDescription(meal: Meal): string {
-    const ingredients = this.extractIngredients(meal);
-    const mainIngredients = ingredients
-      .slice(0, 3)
-      .map((i) => i.name)
-      .join(', ');
-    return `${meal.strArea} ${meal.strCategory} with ${mainIngredients}`;
   }
 }
