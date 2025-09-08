@@ -23,7 +23,7 @@ A modern, responsive recipe search application built with Angular 20, featuring 
 1. Clone the repository:
 
 ```bash
-git clone [repository-url](https://github.com/arashesmailian/Cipher-assessment)
+git clone https://github.com/arashesmailian/Cipher-assessment
 cd recipe-app
 ```
 
